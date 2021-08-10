@@ -8,9 +8,11 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist'),
     filename: '[name].bundle.js',
+    publicPath: '/',
   },
   devServer: {
     overlay: true,
+    historyApiFallback: true,
   },
   module: {
     rules: [

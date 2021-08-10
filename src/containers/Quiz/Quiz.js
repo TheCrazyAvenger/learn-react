@@ -1,33 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import classes from './Quiz.scss';
 import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
 import FinishedQuiz from '../../components/FinishedQuiz/FinishedQuiz';
+import axios from 'axios';
+import Loader from '../../components/UI/Loader/Loader';
 
-const Quiz = () => {
-  const [quiz, setQuiz] = useState([
-    {
-      question: 'Какого цвета небо',
-      rightAnswerId: 2,
-      id: 1,
-      answers: [
-        { text: 'Черный', id: 1 },
-        { text: 'Синий', id: 2 },
-        { text: 'Красный', id: 3 },
-        { text: 'Зеленый', id: 4 },
-      ],
-    },
-    {
-      question: 'В каком году основали Санкт-Петербург',
-      rightAnswerId: 3,
-      id: 2,
-      answers: [
-        { text: '1700', id: 1 },
-        { text: '1702', id: 2 },
-        { text: '1703', id: 3 },
-        { text: '1803', id: 4 },
-      ],
-    },
-  ]);
+const Quiz = (props) => {
+  const [quiz, setQuiz] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [answerState, setAnswerState] = useState(null);
   const [isFinished, setIsFinished] = useState(false);
@@ -79,11 +59,32 @@ const Quiz = () => {
     setResults({});
   };
 
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const responce = await axios.get(
+          `https://learn-react-f467d-default-rtdb.firebaseio.com/quizes/${props.match.params.id}.json`
+        );
+
+        setQuiz(responce.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+
+    getData();
+
+    return () => setLoading(false);
+  });
+
   return (
     <div className={classes.Quiz}>
       <div className={classes.QuizWrapper}>
         <h1>Ответьте на все вопросы</h1>
-        {isFinished ? (
+
+        {loading ? (
+          <Loader />
+        ) : isFinished ? (
           <FinishedQuiz onRetry={retryHandler} results={results} quiz={quiz} />
         ) : (
           <ActiveQuiz
