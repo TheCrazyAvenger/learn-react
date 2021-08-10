@@ -4,7 +4,7 @@ import Quiz from './containers/Quiz/Quiz';
 import Auth from './containers/Auth/Auth';
 import QuizCreator from './containers/QuizCreator/QuizCreator';
 import QuizList from './containers/QuizList/QuizList';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 
 const App = () => {
   return (
@@ -14,6 +14,7 @@ const App = () => {
         <Route path="/quiz-creator" component={QuizCreator} />
         <Route path="/quiz/:id" component={Quiz} />
         <Route path="/" component={QuizList} />
+        <Redirect to={'/'} />
       </Switch>
     </Layout>
   );
