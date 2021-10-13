@@ -15,7 +15,7 @@ export const fetchQuizes = () => {
     dispatch(fetchQuizesStart());
     try {
       const responce = await axios.get(
-        'https://learn-react-f467d-default-rtdb.firebaseio.com/quizes.json'
+        'https://quiz-game-a94b1-default-rtdb.firebaseio.com/quizes.json'
       );
 
       const newQuizes = [];
@@ -38,7 +38,7 @@ export const fetchQuizById = (quizId) => {
 
     try {
       const responce = await axios.get(
-        `https://learn-react-f467d-default-rtdb.firebaseio.com/quizes/${quizId}.json`
+        `https://quiz-game-a94b1-default-rtdb.firebaseio.com/quizes/${quizId}.json`
       );
 
       dispatch(fetchQuizSuccess(responce.data));

@@ -10,10 +10,10 @@ export const auth = (email, password, isLogin) => {
     };
 
     let url =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCt9VBL2J0jWbzCnm8TjN3zGOPaXQ9o8cY';
+      'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyA8V54W5EjM_Q4IRCA-XKFOqXlXFrllZXo';
     if (isLogin) {
       url =
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCt9VBL2J0jWbzCnm8TjN3zGOPaXQ9o8cY';
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyA8V54W5EjM_Q4IRCA-XKFOqXlXFrllZXo';
     }
     const response = await axios.post(url, authData);
     console.log(response.data);

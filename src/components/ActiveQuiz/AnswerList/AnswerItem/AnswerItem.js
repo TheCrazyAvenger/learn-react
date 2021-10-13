@@ -1,15 +1,16 @@
 import React from 'react';
+
 import classes from './AnswerItem.scss';
 
-const AnswerItem = (props) => {
+const AnswerItem = ({ answer, state, onAnswerClick }) => {
   const cls = [classes.AnswerItem];
 
-  if (props.state) {
-    cls.push(classes[props.state]);
+  if (state) {
+    cls.push(classes[state]);
   }
   return (
-    <li className={cls.join(' ')} onClick={() => props.onAnswerClick(props.answer.id)}>
-      {props.answer.text}
+    <li className={cls.join(' ')} onClick={() => onAnswerClick(answer.id)}>
+      {answer.text}
     </li>
   );
 };

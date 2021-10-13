@@ -17,7 +17,7 @@ export const resetQuizCreation = () => {
 export const finishCreateQuiz = () => {
   return async (dispatch, getState) => {
     await axios.post(
-      'https://learn-react-f467d-default-rtdb.firebaseio.com/quizes.json',
+      'https://quiz-game-a94b1-default-rtdb.firebaseio.com/quizes.json',
       getState().create.quiz
     );
 

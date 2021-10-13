@@ -6,7 +6,7 @@ import is from 'is_js';
 import { connect } from 'react-redux';
 import { auth } from '../../store/actions/auth';
 
-const Auth = (props) => {
+const Auth = ({ auth }) => {
   const [isFormValid, setIsFormValid] = useState(false);
   const [formControls, setFormControls] = useState({
     email: {
@@ -96,11 +96,11 @@ const Auth = (props) => {
     });
 
   const loginHandler = () => {
-    props.auth(formControls.email.value, formControls.password.value, true);
+    auth(formControls.email.value, formControls.password.value, true);
   };
 
   const registrationHandler = () => {
-    props.auth(formControls.email.value, formControls.password.value, false);
+    auth(formControls.email.value, formControls.password.value, false);
   };
 
   const submitHandler = (e) => {

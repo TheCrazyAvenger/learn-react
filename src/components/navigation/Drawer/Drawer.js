@@ -1,11 +1,12 @@
 import React from 'react';
-import classes from './Drawer.scss';
-import Backdrop from '../../UI/Backdrop/Backdrop';
 import { NavLink } from 'react-router-dom';
 
-const Drawer = (props) => {
+import Backdrop from '../../UI/Backdrop/Backdrop';
+import classes from './Drawer.scss';
+
+const Drawer = ({ onClose, isOpen, isAuth }) => {
   const clickHandler = () => {
-    props.onClose();
+    onClose();
   };
 
   const renderLinks = (links) => {
@@ -27,7 +28,7 @@ const Drawer = (props) => {
 
   const cls = [classes.Drawer];
 
-  if (!props.isOpen) {
+  if (!isOpen) {
     cls.push(classes.close);
   }
 
@@ -39,7 +40,7 @@ const Drawer = (props) => {
     },
   ];
 
-  if (props.isAuth) {
+  if (isAuth) {
     links.push({
       to: 'quiz-creator',
       label: 'Создать тест',
@@ -59,12 +60,12 @@ const Drawer = (props) => {
   }
 
   return (
-    <React.Fragment>
+    <>
       <nav className={cls.join(' ')}>
         <ul>{renderLinks(links)}</ul>
       </nav>
-      {props.isOpen ? <Backdrop onClick={props.onClose} /> : null}
-    </React.Fragment>
+      {isOpen ? <Backdrop onClick={onClose} /> : null}
+    </>
   );
 };
 
